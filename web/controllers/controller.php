@@ -3,9 +3,20 @@
 require('./models/model.php');
 
 function listProducts() {
-    $products = getProducts();
+    $products = allProducts();
     echo("products : ");
-    var_dump($products);
+
+    
+
+    $Number = countAllProducts($db) ;
+
+    var_dump($Number);
+    
+    /*
+    for ($i=0; $i < productsLength; $i++) { 
+        var_dump($products[$i]);
+    }*/
+    
 
     //require('listProductsView.php');
 }
