@@ -2,11 +2,38 @@
 session_start();
 
 require('./libs/smarty/Smarty.class.php');
+require('./controllers/controller.php');
+
 
 $smarty = new Smarty() ;
 $smarty->display('./views/header.tpl');
 
 
+
+// Fonction de routing.
+if (isset($_GET['action'])) {
+
+  if ($_GET['action'] == 'listProducts') {
+      listProducts();
+
+  }
+
+  elseif ($_GET['action'] == 'displayProduct') {
+      if (isset($_GET['id']) && $_GET['id'] > 0) {
+          displayProduct($_GET['id']);
+      }
+
+      else {
+          echo 'Erreur : aucun identifiant ID renseigné.';
+      }
+      
+  }
+}
+else {
+  listProducts();
+}
+
+/*
 try {
     $bdd = new PDO("mysql:host=localhost;dbname=webapp", "debian-sys-maint",  "aR7RIRZbiUZw3dYk");
     $bdd->query("SET NAMES UTF8");
@@ -23,24 +50,20 @@ try {
     <strong>Donné : </strong> :
      <?php echo $data['name']; ?>
 
-     
+
 <?php
   }
    
-$data->closeCursor(); // Termine le traitement de la requête
+
 
 
 } catch (Exception $e) {
     echo "Problème de connexion à la base de donnée !";
-    die('Erreur : '.$e->getMessage());
-}
-
-
-
+    die();
+}*/
 
 
 $smarty->display('./views/footer.tpl');
 
 
 
-?>
