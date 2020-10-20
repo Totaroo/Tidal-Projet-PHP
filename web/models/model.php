@@ -10,46 +10,63 @@ function dbConnect() {
     }
 }
 
-function countAllProducts() {
 
 
-    $db = dbConnect();
-
-    $nombre = $db->query('SELECT COUNT(*) FROM Products');
-    
-    return $nombre;
-  
-        
-}
-
-
-function allProducts() {
+function GetAllProducts() {
 
     $db = dbConnect();
 
-    $productsNumber = countAllProducts($db);
 
-    $req = $db->query('SELECT id, name, description, price FROM Products');
+    $req = $db->prepare('SELECT id, name, description, price FROM Products');
+    $req->execute();
 
 
+    $result = $req->fetchAll(PDO::FETCH_ASSOC);
+    //return("GetAllProducts");
+
+    return($result);
+/*
     while ($row = $req->fetch())
     {
-
-        
+        foreach ($row as $field => $value) { // I you want you can right this line like this: foreach($row as $value) {
+            echo "<td>" . $value . "</td>"; // I just did not use "htmlspecialchars()" function. 
+        }
+        echo "<br><br>";
     }
-   
-        return $req->fetch();
+   */
+        //return $req->fetch();
 }
-
-
 
 function getProduct($id) {
 
     $db = dbConnect();
-    $req = $db->prepare("SELECT id, name, description, price FROM Products WHERE id = ?");
+    $req = $db->prepare("SELECT id, name, description, price FROM Products WHERE id = ?;");
     $req->execute([$id]);
 
     return $req->fetch();
 }
+
+
+
+function displayBasket($customerId) {
+
+    $db = dbConnect();
+
+
+    $req = $db->prepare('SELECT product, quantity, FROM Basket WHERE customer=:customer;');
+    $req->bindValue(':id', $customerid, PDO::PARAM_INT);
+    $req->execute();
+
+
+    $result = $req->fetchAll(PDO::FETCH_ASSOC);
+    //return("GetAllProducts");
+
+    return($result);
+
+}
+
+
+
+
 
 

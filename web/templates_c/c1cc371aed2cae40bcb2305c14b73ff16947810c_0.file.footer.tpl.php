@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-10-15 13:13:27
-  from '/var/www/web/views/header.tpl' */
+/* Smarty version 3.1.34-dev-7, created on 2020-10-17 21:25:03
+  from '/var/www/views/footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5f884af7d78d33_74839194',
+  'unifunc' => 'content_5f8b612fdd8d21_31535249',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '0c1f2f62735132a2882b53a5d26a79c96f54ab30' => 
+    'c1cc371aed2cae40bcb2305c14b73ff16947810c' => 
     array (
-      0 => '/var/www/web/views/header.tpl',
-      1 => 1602767594,
+      0 => '/var/www/views/footer.tpl',
+      1 => 1602966621,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5f884af7d78d33_74839194 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f8b612fdd8d21_31535249 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +30,7 @@ function content_5f884af7d78d33_74839194 (Smarty_Internal_Template $_smarty_tpl)
 </head>
 <body>
     <div>
-        Ceci est un header
+        Ceci est un footer
     </div>
 </body>
 </html><?php }

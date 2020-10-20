@@ -10,11 +10,14 @@ $smarty->display('./views/header.tpl');
 
 
 
+listAllProducts();
+
+/*
 // Fonction de routing.
 if (isset($_GET['action'])) {
 
   if ($_GET['action'] == 'listProducts') {
-      listProducts();
+    listAllProducts();
 
   }
 
@@ -31,10 +34,10 @@ if (isset($_GET['action'])) {
   }
 }
 else {
-  listProducts();
+  listAllProducts();
 }
 
-
+*/
 
 $smarty->display('./views/footer.tpl');
 
