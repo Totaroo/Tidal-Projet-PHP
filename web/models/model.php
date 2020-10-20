@@ -42,27 +42,20 @@ function getProduct($id) {
     $db = dbConnect();
     $req = $db->prepare("SELECT id, name, description, price FROM Products WHERE id = ?;");
     $req->execute([$id]);
-
     return $req->fetch();
 }
 
 
 
-function displayBasket($customerId) {
-
+function getBasket($customerId) {
     $db = dbConnect();
-
-
-    $req = $db->prepare('SELECT product, quantity, FROM Basket WHERE customer=:customer;');
-    $req->bindValue(':id', $customerid, PDO::PARAM_INT);
+    $req = $db->prepare('SELECT * FROM `Basket` WHERE (customer = :id);');
+    //$req = $db->prepare('SELECT product, quantity, FROM Basket WHERE customer=:customer;');
+    $req->bindValue(':id', $customerId, PDO::PARAM_INT);
     $req->execute();
-
-
     $result = $req->fetchAll(PDO::FETCH_ASSOC);
     //return("GetAllProducts");
-
     return($result);
-
 }
 
 

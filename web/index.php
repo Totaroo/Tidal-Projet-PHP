@@ -10,7 +10,9 @@ $smarty->display('./views/header.tpl');
 
 
 
-listAllProducts();
+displayBasket(1);
+//displayProduct(1);
+//listAllProducts();
 
 /*
 // Fonction de routing.
