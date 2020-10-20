@@ -20,8 +20,6 @@ function displayProduct($id) {
     $product = getProduct($id);
     echo("product : ");
     var_dump($product);
-
-    //require('displayProductView.php');
 }
 
 function displayBasket($customerId) {
@@ -32,6 +30,5 @@ function displayBasket($customerId) {
         var_dump($item);
         echo "<br><br>";
     }
-
-    //require('displayProductView.php');
 }
+

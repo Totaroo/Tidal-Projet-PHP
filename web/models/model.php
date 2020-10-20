@@ -19,22 +19,9 @@ function GetAllProducts() {
 
     $req = $db->prepare('SELECT id, name, description, price FROM Products');
     $req->execute();
-
-
     $result = $req->fetchAll(PDO::FETCH_ASSOC);
-    //return("GetAllProducts");
-
+    
     return($result);
-/*
-    while ($row = $req->fetch())
-    {
-        foreach ($row as $field => $value) { // I you want you can right this line like this: foreach($row as $value) {
-            echo "<td>" . $value . "</td>"; // I just did not use "htmlspecialchars()" function. 
-        }
-        echo "<br><br>";
-    }
-   */
-        //return $req->fetch();
 }
 
 function getProduct($id) {
@@ -49,12 +36,12 @@ function getProduct($id) {
 
 function getBasket($customerId) {
     $db = dbConnect();
+
     $req = $db->prepare('SELECT * FROM `Basket` WHERE (customer = :id);');
-    //$req = $db->prepare('SELECT product, quantity, FROM Basket WHERE customer=:customer;');
     $req->bindValue(':id', $customerId, PDO::PARAM_INT);
     $req->execute();
+
     $result = $req->fetchAll(PDO::FETCH_ASSOC);
-    //return("GetAllProducts");
     return($result);
 }
 
