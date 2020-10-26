@@ -2,16 +2,18 @@
 
 require('./models/model.php');
 
+//permet le transfert de la session entre les pages
+session_start();
+
+
 function displayAllProducts() {
         
     $products = GetAllProducts();
 
-    //var_dump($products);
-
     foreach($products as $item){
         echo("products : ");
         var_dump($item);
-        echo "<br><br>";
+        echo "<br>";
     }
 
 }
@@ -28,7 +30,7 @@ function displayBasket($customerId) {
     foreach($basket as $item){
         echo("products : ");
         var_dump($item);
-        echo "<br><br>";
     }
 }
+
 
