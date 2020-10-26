@@ -1,10 +1,11 @@
 <?php
 
-require('./libs/smarty/Smarty.class.php');
-require('./controllers/controller.php');
+include('./Config/init.php');
 
 
-$smarty = new Smarty() ;
+
+
+
 $smarty->display('./views/header.tpl');
 
 
@@ -13,9 +14,13 @@ if (!isset($_SESSION['loggedin'])) {
   
 } else {
   echo "<h2>bonjour " . $_SESSION['name'] . " </h2>";
+  
 }
 
 
+
+
+//disconnect();
 //displayBasket(1);
 //displayProduct(1);
 //listAllProducts();
@@ -48,9 +53,6 @@ else {
 */
 
 
-?>
-
-<?php
 
 
 $smarty->display('./views/footer.tpl');

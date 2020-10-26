@@ -47,28 +47,16 @@ function getBasket($customerId) {
 }
 
 
-function verifyUser($username, $password) {
-    
-    session_regenerate_id();
-    $_SESSION['loggedin'] = TRUE;
-	$_SESSION['name'] = $_POST['username'];
-	$_SESSION['id'] = $id;
-	echo 'Welcome ' . $_SESSION['name'] . '!';
-    //a enlever
-    //return(1);
 
-    
-    $db = dbConnect();
-    
 
-    $req = $db->prepare('SELECT count(*) FROM `Customers` WHERE (username=:username AND password=:password);');
+function getUserData($username) {
 
-    $req->bindValue(':username', $username, PDO::PARAM_STR);
-    $req->bindValue(':password', $password, PDO::PARAM_STR);
-    $req->execute();
+    $db = dbConnect() ;
 
-    return($req);
-
+        $req = $db->prepare('SELECT id, password FROM `Customers` WHERE ( username=:username )' ) ;
+        $req->bindValue(':username', $username, PDO::PARAM_STR);
+        $req->execute();
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+        return ($data);
 
 }
-

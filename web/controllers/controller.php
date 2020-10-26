@@ -1,9 +1,7 @@
 <?php
 
+//fichier de paramètre
 require('./models/model.php');
-
-//permet le transfert de la session entre les pages
-session_start();
 
 
 function displayAllProducts() {
@@ -31,6 +29,13 @@ function displayBasket($customerId) {
         echo("products : ");
         var_dump($item);
     }
+}
+
+function disconnect(){
+    session_start();
+    session_destroy();
+    // Redirect to the login page:
+    header('Location: index.html');
 }
 
 
