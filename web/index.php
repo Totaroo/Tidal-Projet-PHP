@@ -17,7 +17,9 @@ if (!isset($_SESSION['loggedin'])) {
 }
 
 
-displayAllProducts();
+
+displayCart();
+//displayAllProducts();
 
 
 //$smarty->display('./views/homeProduct.tpl');
@@ -26,7 +28,8 @@ displayAllProducts();
 
 
 //disconnect();
-//displayBasket(1);
+
+
 //displayProduct(1);
 
 

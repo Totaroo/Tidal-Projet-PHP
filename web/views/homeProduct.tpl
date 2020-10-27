@@ -5,7 +5,7 @@
 
     <div>{$product.description}</div>
 
-    <div><h2>Prix : {$product.price}</h2></div>
+    <div><h2>Prix : {$product.price} €</h2></div>
 
     <form action="../controllers/login.php" method="post">
             

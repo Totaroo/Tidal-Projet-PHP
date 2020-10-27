@@ -18,7 +18,7 @@ function GetAllProducts() {
     $db = dbConnect();
 
     
-    $req = $db->prepare('SELECT id, name, description, price FROM Products ORDER BY "popularity"');
+    $req = $db->prepare('SELECT id, name, description, price FROM Products ORDER BY "popularity" ASC');
     $req->execute();
     $result = $req->fetchAll(PDO::FETCH_ASSOC);
 
@@ -35,22 +35,28 @@ function getProduct($id) {
 
 
 
-function getCart($customerId) {
+function getCart($cartId) {
     $db = dbConnect();
 
-    $req = $db->prepare('SELECT * FROM `Basket` WHERE (customer = :id);');
-    $req->bindValue(':id', $customerId, PDO::PARAM_INT);
+    $req = $db->prepare('SELECT  Basket.id, Products.name, BasketItem.quantity
+    FROM Products
+    JOIN BasketItem ON Products.id = BasketItem.productId
+    JOIN Basket ON BasketItem.cartId = Basket.id
+    WHERE Basket.id = :id ;');
+
+    $req->bindValue(':id', $cartId, PDO::PARAM_INT);
     $req->execute();
 
     $result = $req->fetchAll(PDO::FETCH_ASSOC);
     return($result);
 }
 
-function updateCart($value,$customerId) {
+function updateCart($cartId, $productId , $quantity ){
     $db = dbConnect();
+    // on vérifie d'abord l'existence de l'objet dans le panier
 
-    $req = $db->prepare('u * FROM `Basket` WHERE (customer = :id);');
-    $req->bindValue(':id', $customerId, PDO::PARAM_INT);
+    $req = $db->prepare('UPDATE `BasketItem` SET quantity = quantity + :quantity  WHERE (productId= :productId AND cartId = :cartId);');
+    $req->bindValue(':quantity', $quantity, PDO::PARAM_INT);
     $req->execute();
 
     $result = $req->fetchAll(PDO::FETCH_ASSOC);

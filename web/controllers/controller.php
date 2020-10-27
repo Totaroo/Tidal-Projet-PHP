@@ -29,17 +29,29 @@ function displayProduct($id) {
     var_dump($product);
 }
 
-function displayCart($customerId) {
-    $cart = getCart($customerId);
+function displayCart() {
+
+    //On stock en local le panier
+    if (isset($_SESSION['loggedin'])) {
+
+        $customerId = $_SESSION["id"];
+        // Chaque panier est unique et correspond a l'id du client
+
+        $_SESSION['cart'] = getCart($customerId);
+        //var_dump( getCart($customerId) );
+    }
+    
+    $cart = $_SESSION['cart'];
 
     foreach($cart as $item){
-        echo("products : ");
+        echo("Votre panier : ");
         var_dump($item);
+        echo "<br><br>";
     }
 }
 
 
-function addToCart() {
+function addToCart($id, $value) {
     //
 }
 

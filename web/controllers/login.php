@@ -20,7 +20,7 @@ if (  isset($_POST['username'], $_POST['password'])  ) {
     if ( $num_rows > 0 ) {
         echo 'compte existant <br> ';
         $password = ($data[0])['password']  ;
-            
+        $id = ($data[0])['id'];
         // a noter que le md5 n'est pas fiable
         if ( md5($_POST['password']) ==  $password)  {
 
