@@ -1,19 +1,18 @@
 <?php
 
 require('../models/model.php');
-
 //permet le transfert de l'authentification entre les pages
-session_start();
+include('./Config/init.php');
 
+session_start();
 
 //$req = $db->prepare('SELECT count(*) FROM `Customers` WHERE (username=:username AND password=:password);')
 
 if (  isset($_POST['username'], $_POST['password'])  ) {
     $postedUsername =  $_POST['username'] ;
-    //$password = $_POST['password'] ;
 
+    //on récupère les données depuis le modèle
     $data = getUserData($postedUsername);
-
     
     // verifie si l'utilisateur existe 
     $num_rows =  count($data) ;
@@ -49,7 +48,7 @@ if (  isset($_POST['username'], $_POST['password'])  ) {
     echo 'Incorrect username // and/or password!';
     }
     $req->close();    
-    
+
     } else {
     exit('Please fill both the username and password fields!<br>');
 }

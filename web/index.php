@@ -3,9 +3,6 @@
 include('./Config/init.php');
 
 
-
-
-
 $smarty->display('./views/header.tpl');
 
 
@@ -14,8 +11,16 @@ if (!isset($_SESSION['loggedin'])) {
   
 } else {
   echo "<h2>bonjour " . $_SESSION['name'] . " </h2>";
+
+  echo '<form method="post">   <input type="submit" name="disconnectButton"    value="déconnection"/>  </form>';
   
 }
+
+
+displayAllProducts();
+
+
+//$smarty->display('./views/homeProduct.tpl');
 
 
 
@@ -23,7 +28,8 @@ if (!isset($_SESSION['loggedin'])) {
 //disconnect();
 //displayBasket(1);
 //displayProduct(1);
-//listAllProducts();
+
+
 
 /*
 // Fonction de routing.
@@ -51,8 +57,6 @@ else {
 }
 
 */
-
-
 
 
 $smarty->display('./views/footer.tpl');

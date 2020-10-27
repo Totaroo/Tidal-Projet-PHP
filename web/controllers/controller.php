@@ -2,6 +2,9 @@
 
 //fichier de paramètre
 require('./models/model.php');
+include('../Config/init.php');
+//require('../libs/Smarty.class.php');
+
 
 
 function displayAllProducts() {
@@ -9,9 +12,13 @@ function displayAllProducts() {
     $products = GetAllProducts();
 
     foreach($products as $item){
-        echo("products : ");
-        var_dump($item);
-        echo "<br>";
+        //var_dump($item);
+
+        $smarty = new Smarty() ;
+        $smarty->assign('product', $item );
+        $smarty->display('./views/homeProduct.tpl');
+
+        echo "<br><br><br>";
     }
 
 }
@@ -22,20 +29,34 @@ function displayProduct($id) {
     var_dump($product);
 }
 
-function displayBasket($customerId) {
-    $basket = getBasket($customerId);
+function displayCart($customerId) {
+    $cart = getCart($customerId);
 
-    foreach($basket as $item){
+    foreach($cart as $item){
         echo("products : ");
         var_dump($item);
     }
 }
 
+
+function addToCart() {
+    //
+}
+
+//gestion des utilisateurs
+
 function disconnect(){
     session_start();
     session_destroy();
-    // Redirect to the login page:
-    header('Location: index.html');
 }
 
+//event listeners
 
+if(isset($_POST['disconnectButton'])) { 
+    disconnect();
+} 
+
+
+if(isset($_POST['addToCartButton'])) { 
+
+} 
