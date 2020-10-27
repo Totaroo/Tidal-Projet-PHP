@@ -54,17 +54,16 @@ function getCart($cartId) {
 function updateCart($cartId, $productId , $quantity ){
     $db = dbConnect();
     // on vérifie d'abord l'existence de l'objet dans le panier
-
+    var_dump("model" , $cartId , $productId , $quantity) ;
     $req = $db->prepare('UPDATE `BasketItem` SET quantity = quantity + :quantity  WHERE (productId= :productId AND cartId = :cartId);');
     $req->bindValue(':quantity', $quantity, PDO::PARAM_INT);
+    $req->bindValue(':productId', $productId, PDO::PARAM_INT);
+    $req->bindValue(':cartId', $cartId, PDO::PARAM_INT);
     $req->execute();
 
     $result = $req->fetchAll(PDO::FETCH_ASSOC);
     return($result);
 }
-
-
-
 
 
 function getUserData($username) {

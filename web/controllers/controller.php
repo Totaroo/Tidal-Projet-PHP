@@ -4,8 +4,7 @@
 require('./models/model.php');
 include('../Config/init.php');
 //require('../libs/Smarty.class.php');
-
-
+session_start();
 
 function displayAllProducts() {
         
@@ -59,11 +58,13 @@ function displayCart() {
 
 
 function addToCart($productId , $value) {
-   
+    //echo "Add to cart";
+
+    var_dump((int)$productId) ;
        //On stock en local le panier
     if (isset($_SESSION['loggedin'])) {
-
         $customerId = $_SESSION["id"];
+        //var_dump("custid : " , $customerId , $productId ,"value :" , $value, "end") ;
         updateCart($customerId, $productId , $value );
     }
     
@@ -71,7 +72,7 @@ function addToCart($productId , $value) {
     //permet d'identifier la ligne d'un panier a partir de son id
     
     //mise à jour coté client
-    foreach($cart as $item) {
+    /*foreach($cart as $item) {
     
         if ($productId == $item["id"]) {
             var_dump($item["id"]);
@@ -80,7 +81,7 @@ function addToCart($productId , $value) {
             break;
         }
 
-    }
+    }**/
 
 }
 
@@ -101,7 +102,8 @@ if(isset($_POST['disconnectButton'])) {
 if(isset($_POST['addToCartButton'])) { 
     $productId = $_POST['productId'];
     $value = $_POST['value'];
-    //var_dump($productId);
+   // var_dump("event : " , $productId, $value  );
+    //echo  "<br>" ;
     addToCart($productId , $value);
 
 } 
