@@ -38,7 +38,7 @@ function getProduct($id) {
 function getCart($cartId) {
     $db = dbConnect();
 
-    $req = $db->prepare('SELECT  Basket.id, Products.name, BasketItem.quantity
+    $req = $db->prepare('SELECT  Products.id, Products.name, BasketItem.quantity
     FROM Products
     JOIN BasketItem ON Products.id = BasketItem.productId
     JOIN Basket ON BasketItem.cartId = Basket.id

@@ -7,8 +7,10 @@
 
     <div><h2>Prix : {$product.price} €</h2></div>
 
-    <form action="../controllers/login.php" method="post">
+    <form method="post">
             
+        <input type="hidden" name="value" value=1 >
+        <input type="hidden" name="productId" value={$product.id} >
         <input type="submit" id="submit" name="addToCartButton" value="+ Ajouter au panier">
              
     </form>

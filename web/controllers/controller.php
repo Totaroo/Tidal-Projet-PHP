@@ -43,16 +43,45 @@ function displayCart() {
     
     $cart = $_SESSION['cart'];
 
-    foreach($cart as $item){
-        echo("Votre panier : ");
-        var_dump($item);
-        echo "<br><br>";
+   // var_dump($item) ;
+    if ($cart == NULL ) {
+        echo "Panier vide" ;
+    }else {
+
+        foreach($cart as $item){
+            echo("Votre panier : ");
+            var_dump($item);
+            echo "<br><br>";
+        }
     }
+
 }
 
 
-function addToCart($id, $value) {
-    //
+function addToCart($productId , $value) {
+   
+       //On stock en local le panier
+    if (isset($_SESSION['loggedin'])) {
+
+        $customerId = $_SESSION["id"];
+        updateCart($customerId, $productId , $value );
+    }
+    
+    $cart = $_SESSION['cart'];
+    //permet d'identifier la ligne d'un panier a partir de son id
+    
+    //mise à jour coté client
+    foreach($cart as $item) {
+    
+        if ($productId == $item["id"]) {
+            var_dump($item["id"]);
+            $cartId = $item["id"] ;
+            $item["quantity"] =   $item["quantity"] + value ; 
+            break;
+        }
+
+    }
+
 }
 
 //gestion des utilisateurs
@@ -70,5 +99,9 @@ if(isset($_POST['disconnectButton'])) {
 
 
 if(isset($_POST['addToCartButton'])) { 
+    $productId = $_POST['productId'];
+    $value = $_POST['value'];
+    //var_dump($productId);
+    addToCart($productId , $value);
 
 } 
