@@ -24,8 +24,9 @@ function displayAllProducts() {
 
 function displayProduct($id) {
     $product = getProduct($id);
-    echo("product : ");
-    var_dump($product);
+    //echo("product : ");
+    //var_dump($product);
+    return($product);
 }
 
 function displayCart() {
@@ -57,18 +58,54 @@ function displayCart() {
 }
 
 
+
 function addToCart($productId , $value) {
     //echo "Add to cart";
-
-    var_dump((int)$productId) ;
+    $cart = $_SESSION['cart'];
+    //var_dump((int)$productId) ;
        //On stock en local le panier
     if (isset($_SESSION['loggedin'])) {
         $customerId = $_SESSION["id"];
         //var_dump("custid : " , $customerId , $productId ,"value :" , $value, "end") ;
         updateCart($customerId, $productId , $value );
+    } else {
+        echo "disconnected";
+        
+        $productExist = 0;
+
+
+        foreach($cart as $item) {
+    
+            if ($productId == $item["id"]) {
+                //var_dump($item["id"]);
+                //$cartId = $item["id"] ;
+                echo "Produit existant <br>";
+                $item["quantity"] =   $item["quantity"] + value ; 
+                $productExist = 1 ;
+                break;
+            }
+    
+        }
+        if (!$productExist) {
+            echo "flag activé" ;
+
+            $product = getProduct($productId);
+            $cartItem = array( 'id' => $product[id] , 'name' => $product[name], 'quantity' => $value );
+            array_push($cart , $cartItem) ;
+
+            $_SESSION['cart'] = $cart ;
+            var_dump($cart);
+            //$_SESSION['cart'].append
+        }
+
+        //var_dump($product) ;
+        echo "<br>" ;
+        
+        //var_dump($cartItem) ;
+
     }
     
-    $cart = $_SESSION['cart'];
+    
     //permet d'identifier la ligne d'un panier a partir de son id
     
     //mise à jour coté client

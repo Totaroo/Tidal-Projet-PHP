@@ -30,7 +30,8 @@ function getProduct($id) {
     $db = dbConnect();
     $req = $db->prepare("SELECT id, name, description, price FROM Products WHERE id = ?;");
     $req->execute([$id]);
-    return $req->fetch();
+    //var_dump($req->fetch(PDO::FETCH_ASSOC));
+    return $req->fetch(PDO::FETCH_ASSOC);
 }
 
 

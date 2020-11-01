@@ -17,7 +17,7 @@ if (!isset($_SESSION['loggedin'])) {
 }
 
 
-
+displayProduct(1);
 displayCart();
 displayAllProducts();
 
