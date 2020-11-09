@@ -1,7 +1,6 @@
 <div>
-
-
-    <h1>{$product.id} : {$product.name}</h1>
+    
+    <h1> {$product.id} : {$product.name}</h1>
 
     <div>{$product.description}</div>
 

@@ -21,9 +21,9 @@ function GetAllProducts() {
     $req = $db->prepare('SELECT id, name, description, price FROM Products ORDER BY "popularity" ASC');
     $req->execute();
     $result = $req->fetchAll(PDO::FETCH_ASSOC);
-
     return($result);
 }
+
 
 function getProduct($id) {
 

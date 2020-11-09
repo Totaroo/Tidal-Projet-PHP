@@ -60,49 +60,78 @@ function displayCart() {
 
 
 function addToCart($productId , $value) {
-    //echo "Add to cart";
+    //On récupère le panier depuis les cookies
     $cart = $_SESSION['cart'];
-    //var_dump((int)$productId) ;
-       //On stock en local le panier
+
+
+    //Si l'utilisateur est connecté on utilise les fonction BDD
     if (isset($_SESSION['loggedin'])) {
         $customerId = $_SESSION["id"];
         //var_dump("custid : " , $customerId , $productId ,"value :" , $value, "end") ;
         updateCart($customerId, $productId , $value );
-    } else {
-        echo "disconnected";
+    } 
+    else {
+        //echo $value;
         
         $productExist = 0;
 
+        $newCart = [];
 
-        foreach($cart as $item) {
+        foreach($cart as $item) { // verifie si le produit est dans le paniet et l'incrémente si oui
     
-            if ($productId == $item["id"]) {
+            if ($productId == $item["id"]) { 
+
                 //var_dump($item["id"]);
                 //$cartId = $item["id"] ;
-                echo "Produit existant <br>";
-                $item["quantity"] =   $item["quantity"] + value ; 
+                echo "Produit existant dans le panier <br>";
+                $itemQuantity = $item["quantity"] + $value ; //incrémentation de la quantité associé au produit
+                $item["quantity"] =   (string)$itemQuantity;
+                
                 $productExist = 1 ;
-                break;
+                //var_dump($item);
+                
+                
             }
+
+            array_push($newCart , $item) ;
+            echo "<br>";
     
         }
-        if (!$productExist) {
-            echo "flag activé" ;
+
+        //var_dump($newCart);
+        
+        //var_dump($newCart);
+
+        if (!$productExist) { //cas ou le produit n'est pas dans le panier
+            echo "produit non ajouté au panier<br>" ;
 
             $product = getProduct($productId);
             $cartItem = array( 'id' => $product[id] , 'name' => $product[name], 'quantity' => $value );
+
+            //php ne peut pas push sur un array vide
+            if ($cart == null ) {
+                echo "cart is null<br>" ;
+                $cart = [] ;
+            }
+
+            
             array_push($cart , $cartItem) ;
 
-            $_SESSION['cart'] = $cart ;
-            var_dump($cart);
+            
+            
+            $newCart = $cart ;
+       
+            
             //$_SESSION['cart'].append
-        }
-
-        //var_dump($product) ;
-        echo "<br>" ;
+        } 
         
-        //var_dump($cartItem) ;
+        echo "<br>" ;
 
+
+        $_SESSION['cart'] = $newCart;
+ 
+        
+        
     }
     
     
